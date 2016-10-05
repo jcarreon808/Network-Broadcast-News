@@ -5,6 +5,7 @@ const options = {
   'host':'127.0.0.1'
 };
 
+let clientName;
 
 const client = net.connect(options, () => {
   console.log('Connected to Server!');
@@ -14,6 +15,8 @@ const client = net.connect(options, () => {
 client.on('data', (data) => {
   console.log(data.toString());
 });
+
+client.on('end', process.exit);
 
 
 process.stdin.on('readable', () => {
