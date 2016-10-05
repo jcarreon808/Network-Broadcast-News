@@ -9,11 +9,11 @@ const server = net.createServer((request) => {
 
   request.on('data', (data)=>{
     console.log(data.toString());
-    const userInput = data.toString();
+    const userInput = data.toString().substring(0,data.length -1);
     if(userName !== undefined){
       newRequests.forEach(user => {
         if(request !== user){
-          user.write(`${userName.substring(0, userName.length)}: ${userInput.substring(0,userInput.length - 1)}`);
+          user.write(`${userName.substring(0, userName.length - 1)}: ${userInput.substring(0,userInput.length - 1)}`);
         }
       })
     } else {
@@ -24,7 +24,7 @@ const server = net.createServer((request) => {
 
       console.log(isNew);
       if(isNew){
-      userName = userInput.substring(0, userInput.length-1);
+      userName = userInput;
       currentUsers.push(userName);
       console.log(currentUsers);
       } else {
